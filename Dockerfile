@@ -4,9 +4,11 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
+COPY scripts ./scripts
 RUN npm ci
 
 COPY . .
+RUN node scripts/patch-framework.mjs
 RUN npm run build
 
 # Production stage
@@ -39,6 +41,7 @@ ENV PORT=${PORT}
 ENV CACHE_TYPE=${CACHE_TYPE}
 
 COPY package*.json ./
+COPY scripts ./scripts
 RUN npm ci --only=production
 
 COPY --from=builder /app/dist ./dist

@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "dev": "tsx watch src/server.ts",
-        "postinstall": "node scripts/patch-framework.mjs",
+        "postinstall": "node scripts/patch-framework.mjs || echo '[postinstall] patch script not present - skipped'",
         "build": "tsc || echo '[build] tsc reported type errors; runtime uses tsx so this is non-fatal'",
         "start": "tsx src/server.ts",
         "format": "prettier --write src",
