@@ -4,6 +4,7 @@
     "type": "module",
     "scripts": {
         "dev": "tsx watch src/server.ts",
+        "postinstall": "node scripts/patch-framework.mjs",
         "build": "tsc",
         "start": "npm run build && node dist/server.js",
         "format": "prettier --write src",

@@ -14,9 +14,9 @@ async function main() {
         version: '1.0.0',
 
         // Network
-        host: process.env.HOST ?? 'localhost',
+        host: process.env.HOST ?? '0.0.0.0', // bind all interfaces (required on Render/PaaS)
         port: Number(process.env.PORT ?? 3000),
-        publicUrl: process.env.PUBLIC_URL,
+        publicUrl: process.env.PUBLIC_URL ?? process.env.RENDER_EXTERNAL_URL,
 
         // Cache (memory for dev, Redis for prod)
         cache: {
@@ -83,6 +83,7 @@ async function main() {
 
     const publicUrl =
         process.env.PUBLIC_URL ??
+        process.env.RENDER_EXTERNAL_URL ??
         `http://${process.env.HOST ?? 'localhost'}:${process.env.PORT ?? 3000}`;
 
     const uiUrl = `https://ui.cinepro.cc/?omssurl=${encodeURIComponent(publicUrl)}`;
